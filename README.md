@@ -3,7 +3,7 @@
 This repository contains the implementation and analysis of Backdoor attacks on Graph Neural Networks both Traditional (GCN, GraphSage and GAT) and Higher Order Graph Neural Network (ESAN, SUN and SAGNN) and a new model SAGNN+CS. 
 
 <p align="center">
-  <img src="graph_backdoor.png" width="500">
+  <img src="images/abhi_system.png" width="500">
 </p>
 
 # Project Setup and Installation
