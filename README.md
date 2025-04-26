@@ -6,6 +6,49 @@ This repository contains the implementation and analysis of Backdoor attacks on 
   <img src="images/abhi_system.png" width="500">
 </p>
 
+**Results on Cora dataset.** Each cell shows ASR/Accuracy. In the Baseline column the highest value is bolded; in each attack column, the lowest ASR is bolded and the highest clean accuracy is bolded.
+
+| Model               | GNN Type    | Baseline    | SBA-Samp       | SBA-Gen        | GTA            | UGBA           | DPGBA          |
+|---------------------|-------------|-------------|----------------|----------------|----------------|----------------|----------------|
+| GCN                 | Traditional | 88.54       | 90/88.54       | 100/87.43      | 90/87.43       | 100/87.80      | 100/87.62      |
+| GraphSage           | Traditional | **89.28**   | 100/**89.28**  | 100/**88.91**  | 100/**88.72**  | 100/88.17      | 100/88.17      |
+| GAT                 | Traditional | 88.54       | 90/88.54       | 100/87.99      | 100/87.43      | 100/**88.72**  | 100/88.54      |
+| SUN                 | Higher-Order| 87.62       | **0.0**/87.62  | **0.0**/87.43  | 20.0/86.88     | 20.0/87.25     | **0.0**/87.25  |
+| ESAN-ego            | Higher-Order| 48.61       | **0.0**/48.61  | **0.0**/48.61  | 10.0/48.61     | 20.0/48.24     | **0.0**/48.98  |
+| ESAN-edge_deleted   | Higher-Order| 86.69       | 63.33/87.12    | 63.33/87.83    | **0.0**/87.24  | 10.0/85.32     | 0.0/87.75      |
+| ESAN-node_deleted   | Higher-Order| 86.69       | 63.33/87.83    | 63.33/87.27    | 10.0/87.99     | 10.0/82.26     | 0.0/87.06      |
+| SAGN                | Higher-Order| 86.88       | **0.0**/87.70  | **0.0**/87.88  | 20.0/86.69     | 20.0/86.14     | **0.0**/86.32  |
+| SAGNN+CS (Ours)     | Higher-Order| 87.06       | **0.0**/87.99  | **0.0**/87.80  | 10.0/86.88     | **10.0**/86.69 | **0.0**/87.62  |
+
+**Results on CiteSeer dataset.** Each cell shows ASR/Accuracy. In the Baseline column the highest value is bolded; in each attack column, the lowest ASR is bolded and the highest clean accuracy is bolded.
+
+| Model               | GNN Type    | Baseline   | SBA-Samp         | SBA-Gen          | GTA            | UGBA           | DPGBA          |
+|---------------------|-------------|------------|------------------|------------------|----------------|----------------|----------------|
+| GCN                 | Traditional | 75.19      | 90/75.19         | 90/73.38         | 90/73.38       | 90/73.53       | 90/72.78       |
+| GraphSage           | Traditional | 75.34      | 100/75.34        | 100/75.79        | 90/76.09       | 100/76.09      | 100/75.64      |
+| GAT                 | Traditional | 73.68      | 100/73.68        | 90/73.68         | 100/74.14      | 100/74.14      | 100/74.14      |
+| SUN                 | Higher-Order| 75.04      | **0.0**/74.59    | **0.0**/73.98    | 3.33/72.63     | **0.0**/75.19  | **0.0**/74.44  |
+| ESAN-ego            | Higher-Order| 24.96      | 45.0/25.26       | 45.0/25.26       | **0.0**/25.26  | **0.0**/25.11  | **0.0**/25.26  |
+| ESAN-edge_deleted   | Higher-Order| 72.93      | 45.0/71.73       | 45.0/72.48       | **0.0**/72.48  | **0.0**/71.73  | **0.0**/73.08  |
+| ESAN-node_deleted   | Higher-Order| 72.18      | 45.0/72.18       | 45.0/72.93       | **0.0**/73.23  | **0.0**/72.63  | **0.0**/72.33  |
+| SAGN                | Higher-Order| **75.79**  | **0.0**/**76.84**| **0.0**/**76.09**| **0.0**/**76.84**| **0.0**/**76.54**| **0.0**/**76.39**|
+| SAGNN+CS (Ours)     | Higher-Order| 71.88      | **0.0**/72.18    | 3.33/71.58       | 3.33/72.18     | 3.33/72.33     | 3.33/71.58     |
+
+**Results on PubMed dataset.** Each cell shows ASR/Accuracy. In the Baseline column the highest value is bolded; in each attack column, the lowest ASR is bolded and the highest clean accuracy is bolded.
+
+| Model               | GNN Type    | Baseline   | SBA-Samp         | SBA-Gen          | GTA            | UGBA           | DPGBA          |
+|---------------------|-------------|------------|------------------|------------------|----------------|----------------|----------------|
+| GCN                 | Traditional | 83.39      | 90/83.39         | 92.5/85.39       | 92.5/86.03     | 95/86.46       | 95/86.63       |
+| GraphSage           | Traditional | 84.28      | 92.5/84.28       | 95/86.61         | 95/87.22      | 95/87.65       | 90/87.90       |
+| GAT                 | Traditional | 85.27      | 95/85.27         | 95/86.66         | 97.5/86.96    | 97.5/87.07     | 97.5/87.09     |
+| SUN                 | Higher-Order| 88.18      | **0.0**/**88.36**| **0.0**/**88.18**| 5.0/**88.38** | **2.5**/**88.66**| **0.0**/**89.04**|
+| ESAN-ego            | Higher-Order| 34.29      | 63.33/34.21      | 63.33/34.11      | 13.33/34.11   | 10.0/34.11     | 3.33/34.09     |
+| ESAN-edge_deleted   | Higher-Order| 87.80      | 63.33/87.12      | 63.33/87.83      | **0.0**/87.24 | 10.0/85.32     | **0.0**/87.75  |
+| ESAN-node_deleted   | Higher-Order| 87.37      | 63.33/87.83      | 63.33/87.27      | 6.67/87.47    | 6.67/84.99     | **0.0**/87.88  |
+| SAGN                | Higher-Order| 87.45      | **0.0**/87.70    | **0.0**/87.88    | 2.5/87.34     | **2.5**/87.52  | **0.0**/87.85  |
+| SAGNN+CS (Ours)     | Higher-Order| **88.21**  | **0.0**/88.23    | **0.0**/88.05    | 5.0/**88.38** | 5.0/87.95      | **0.0**/88.08  |
+
+
 # Project Setup and Installation
 
 This project uses a `requirements.txt` file to list all the Python packages (and their specific versions) that the project depends on. Follow the steps below to set up your environment and install the required dependencies.
