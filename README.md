@@ -1,6 +1,7 @@
 # SAGNN_CS__A_Resilient_Graph_Neural_Network_Framework_Against_Backdoor_Threats
 
-This repository contains the implementation and analysis of Backdoor attacks on Graph Neural Networks both Traditional (GCN, GraphSage and GAT) and Higher Order Graph Neural Network (ESAN, SUN and SAGNN) and a new model SAGNN+CS. 
+This repository contains the implementation and analysis of Backdoor attacks on Graph Neural Networks both Traditional (GCN, GraphSage and GAT) and Higher Order Graph Neural Network (ESAN, SUN and SAGNN) and a new model SAGNN+CS. This is the implementation of this paper [SAGNN+CS: A Resilient Graph Neural Network Framework Against Backdoor Threats](https://caiac.pubpub.org/pub/s0xf3xtc)
+
 
 <p align="center">
   <img src="images/abhi_system.png" width="500">
