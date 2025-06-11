@@ -51,15 +51,6 @@ def compute_metrics_esan(model, subgraphs, data, poisoned_nodes, target_labels):
     return asr, clean_acc
 
 
-def compute_metrics_gnn(model, data, poisoned_nodes):
-    model.eval()
-    with torch.no_grad():
-        out = model(data.x, data.edge_index).detach()
-        _, pred = out.max(dim=1)
-        asr = (pred[poisoned_nodes] == data.y[poisoned_nodes]).sum().item() / len(poisoned_nodes) * 100
-        clean_acc = accuracy_score(data.y[data.test_mask].cpu(), pred[data.test_mask].cpu()) * 100
-    return asr, clean_acc
-
 
 def compute_metrics(model, data, poisoned_nodes, target_labels):
     model.eval()
@@ -472,7 +463,7 @@ def run_attacks_for_model(model_type):
                                 alpha=0.7,
                                 early_stopping=True
                             )
-                            asr, clean_acc = compute_metrics_gnn(trained_model, data_poisoned, poisoned_nodes)
+                            asr, clean_acc = compute_metrics(model, data_poisoned, poisoned_nodes, target_labels)
                             results_summary.append({
                                 "Dataset": dataset_name,
                                 "Model": gnn_type,
