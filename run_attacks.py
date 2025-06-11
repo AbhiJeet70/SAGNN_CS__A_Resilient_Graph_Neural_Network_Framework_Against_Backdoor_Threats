@@ -29,9 +29,9 @@ def instantiate_model(model_type, input_dim, output_dim):
         return ESAN(input_dim, hidden_dim=64, output_dim=output_dim).to(device)
     elif model_type == "sun":
         return SUN(num_features=input_dim, num_classes=output_dim, hidden_channels=64).to(device)
-    elif model_type == "sagn":
+    elif model_type == "sagnn":
         return SubstructureAwareGNN(in_channels=input_dim, hidden_channels=64, out_channels=output_dim).to(device)
-    elif model_type == "sagn+cs":
+    elif model_type == "sagnn+cs":
         from models import SubstructureAwareGNN_CS
         return SubstructureAwareGNN_CS(in_channels=input_dim, hidden_channels=64, out_channels=output_dim).to(device)
     elif model_type == "gnn":
@@ -171,7 +171,7 @@ def run_attacks_for_model(model_type):
                     except Exception as e:
                         print(f"Error during attack {attack} on {dataset_name} with ESAN (Policy: {policy}): {e}")
 
-        elif model_type == "sagn":
+        elif model_type == "sagnn":
             print(f"Initializing SAGN for dataset {dataset_name}")
             model = SubstructureAwareGNN(in_channels=input_dim, hidden_channels=64, out_channels=output_dim).to(device)
             optimizer = torch.optim.Adam(model.parameters(), lr=0.002)
@@ -193,7 +193,7 @@ def run_attacks_for_model(model_type):
             print(f"Dataset: {dataset_name}, Model: SAGN, Baseline Accuracy: {baseline_acc * 100:.2f}%")
             results_summary.append({
                 "Dataset": dataset_name,
-                "Model": "SAGN",
+                "Model": "SAGNN",
                 "Attack": "None",
                 "Defense": "None",
                 "ASR": "N/A",
@@ -242,7 +242,7 @@ def run_attacks_for_model(model_type):
                     asr, clean_acc = compute_metrics(model, data_poisoned, poisoned_nodes, target_labels)
                     results_summary.append({
                         "Dataset": dataset_name,
-                        "Model": "SAGN",
+                        "Model": "SAGNN",
                         "Attack": attack,
                         "Defense": "None",
                         "ASR": asr,
@@ -252,7 +252,7 @@ def run_attacks_for_model(model_type):
                 except Exception as e:
                     print(f"Error during attack {attack} on dataset {dataset_name} with SAGN: {e}")
 
-        elif model_type == "sagn+cs":
+        elif model_type == "sagnn+cs":
             print(f"Initializing SAGN+CS for dataset {dataset_name}")
             model = SubstructureAwareGNN_CS(in_channels=input_dim, hidden_channels=64, out_channels=output_dim).to(device)
             optimizer = torch.optim.Adam(model.parameters(), lr=0.002)
@@ -274,7 +274,7 @@ def run_attacks_for_model(model_type):
             print(f"Dataset: {dataset_name}, Model: SAGN+CS, Baseline Accuracy: {baseline_acc * 100:.2f}%")
             results_summary.append({
                 "Dataset": dataset_name,
-                "Model": "SAGN+CS",
+                "Model": "SAGNN+CS",
                 "Attack": "None",
                 "Defense": "None",
                 "ASR": "N/A",
@@ -323,7 +323,7 @@ def run_attacks_for_model(model_type):
                     asr, clean_acc = compute_metrics(model, data_poisoned, poisoned_nodes, target_labels)
                     results_summary.append({
                         "Dataset": dataset_name,
-                        "Model": "SAGN+CS",
+                        "Model": "SAGNN+CS",
                         "Attack": attack,
                         "Defense": "None",
                         "ASR": asr,
